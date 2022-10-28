@@ -1,0 +1,83 @@
+@model Handicraft_Website.Models.Category
+@{
+    Layout = "_AdminDashboard";
+}
+<main id="main" class="main">
+    <section class="section">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Vertical Form</h5>
+
+                        <!-- Vertical Form -->
+                        <form method="post" class="row g-3" asp-controller="Admin" asp-action="AddCategory" enctype="multipart/form-data">
+                            <div class="col-12">
+                                <label asp-for="CategoryName"  class="form-label">Category Name</label>
+                                <input asp-for="CategoryName" type="text" class="form-control"> 
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImageFile" class="control-label"></label>
+                                <input asp-for="ImageFile" class="form-control" />
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                 @* <input type="submit" value="Create" class="btn btn-primary" /> *@
+                            </div>
+                        </form><!-- Vertical Form -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<main id="main" class="main">
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg">
+
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Testimonials Requests</h5>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#ID</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var item in ViewBag.Categories)
+                {
+                  <tr>
+                  <th scope="row">@item.Id</th>
+                  <td>@item.CategoryName</td>
+                  <td><img src=@Url.Content("~/images/" + item.ImagePath) asp-append-version="true"
+                        style="border-radius:20%;" width="100" height="100" /></td>
+                  </tr>
+                }
+                
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+</main>

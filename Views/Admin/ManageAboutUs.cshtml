@@ -1,0 +1,220 @@
+@model IEnumerable<Handicraft_Website.Models.Content>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Home";
+}
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+    <h2 class="ltext-105 cl0 txt-center">
+        About
+    </h2>
+</section>
+<section class="bg0 p-t-75 p-b-120">
+    <div class="container">
+
+        <div class="border border-5 border-danger">
+            <div class="row p-b-148 p-5">
+                <div class="col-md-7 col-lg-8">
+
+                    <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+
+
+                        <div class="">
+
+                            <h3 class="mtext-111 cl2 p-b-16 d-inline-block">
+                                @Model.ElementAt(0).Header
+                            </h3>
+                        </div>
+
+
+
+                        <div>
+                            <p class="stext-113 cl6 p-b-26">
+                                @Model.ElementAt(0).Content1
+                            </p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center py-5">
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                                            data-target="#content1">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+                    <div class="how-bor1 ">
+                        <div class="hov-img0 ">
+                            <img src="images/about-01.jpg" alt="IMG">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="border border-5 border-danger p-5 my-5">
+            <div class="row">
+                <div class="order-md-2 col-md-7 col-lg-8 p-b-30">
+                    <div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
+                        <div class="">
+
+                            <h3 class="mtext-111 cl2 p-b-16 d-inline-block">
+                                @Model.ElementAt(1).Header
+                            </h3>
+
+                        </div>
+                        <div class="">
+                            <p class="stext-113 cl6 p-b-26">
+                                @Model.ElementAt(1).Content1
+                            </p>
+
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center py-5">
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                                            data-target="#content2">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
+                    <div class="how-bor2">
+                        <div class="hov-img0 ">
+                            <img src="images/about-02.jpg" alt="IMG">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+@* <!-- Modal for header 1-->
+    <div class="modal fade" id="header1" tabindex="-1" role="dialog" aria-labelledby="header1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="header1">Edit page</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <form>
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Header 1</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+
+
+<!-- Modal for contet 1-->
+<div class="modal fade" id="content1" tabindex="-1" role="dialog" aria-labelledby="content1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="content1">Edit page</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditManageAboutUs" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.ElementAt(0).Header">Header</label>
+                        <textarea asp-for="@Model.ElementAt(0).Header" class="form-control"
+                            id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.ElementAt(0).Content1" for="exampleFormControlTextarea1">Content</label>
+                        <textarea asp-for="@Model.ElementAt(0).Content1" class="form-control"
+                            id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label name="ImageFile" class="control-label"></label>
+                        <input type="file" name="ImageFile" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button asp-action="EditManageAboutUs" asp-controller="Admin"
+                            asp-route-Id="@Model.ElementAt(0).Id" type="submit" class="btn btn btn-primary">Save
+                            change</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal for contet 2-->
+<div class="modal fade" id="content2" tabindex="-1" role="dialog" aria-labelledby="content2Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="content2">Edit page</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditManageAboutUs" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.ElementAt(1).Header">Header</label>
+                        <textarea asp-for="@Model.ElementAt(1).Header" class="form-control"
+                            id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.ElementAt(1).Content1" for="exampleFormControlTextarea1">Content</label>
+                        <textarea asp-for="@Model.ElementAt(1).Content1" class="form-control"
+                            id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label name="ImageFile" class="control-label"></label>
+                        <input type="file" name="ImageFile" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button asp-action="EditManageAboutUs" asp-controller="Admin"
+                            asp-route-Id="@Model.ElementAt(1).Id" type="submit" class="btn btn btn-primary">Save
+                            change</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

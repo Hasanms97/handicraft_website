@@ -1,0 +1,68 @@
+@{
+  Layout = "_AdminDashboard";
+}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Vendor Registeration</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Vendor Registeration</li>
+        <li class="breadcrumb-item active">General</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg">
+
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Table with hoverable rows</h5>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#ID</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  @* <th scope="col">Request date</th> *@
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var item in @ViewBag.vendorsOnAproval)
+                {
+                  <tr>
+                  <th scope="row">1</th>
+                  <td>@item.Userr.FirstName</td>
+                  <td>@item.Userr.LastName</td>
+                  <td>@item.UserName</td>
+                  <td>@item.Email</td>
+                  
+                  <td>
+                  <a  class="btn btn-success btn-sm" asp-action = "UpdateRole" asp-controller = "Admin" asp-route-id="@item.Id">Accept</a>
+                  <a href="#" class="btn btn-danger btn-sm ">Reject</a>
+                  </td>
+                  </tr>
+                }
+                
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+</main>

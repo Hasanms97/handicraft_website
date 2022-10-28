@@ -1,0 +1,75 @@
+@{
+  Layout = "_VendorDashboard";
+}
+@model IEnumerable<Handicraft_Website.Models.CartProduct>
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Form Elements</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Forms</li>
+        <li class="breadcrumb-item active">Elements</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Default Table</h5>
+
+            <!-- Default Table -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @{
+                  int x = 1;
+                  List<Category> categories = ViewBag.categoryList;
+                }
+                @foreach (var item in Model)
+                {
+                  <tr>
+                    <th>@x</th>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Product.Price</td>
+                    <td>@categories.Find(x => x.Id == item.Product.CategoryId).CategoryName
+                    <td>@item.Product.Description</td>
+                    <td>@item.Product.Quantity</td>
+                    <td>
+                      <div>
+                      <a asp-action="EditCraft" asp-controller="Vendor" asp-route-id="@item.Product.Id">Edit</a>
+                      <form asp-action="DeleteCraft">
+                        <a asp-action = "DeleteCraft" asp-controller = "Vendor" asp-route-id="@item.Product.Id" >Delete</a>
+                      </form>
+                      <a asp-action="CraftDetails" asp-route-id="@item.Product.Id">details</a>
+                      </div>
+                    </td>
+                  </tr>
+                }
+
+
+              </tbody>
+            </table>
+            <!-- End Default Table Example -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+</main>

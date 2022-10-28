@@ -1,0 +1,104 @@
+@{
+    Layout = "_VendorDashboard";
+}
+@model Handicraft_Website.Models.Product
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Users</li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row justify-content-center">
+
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+
+                        <div class="tab-content pt-2">
+
+
+
+                            <div class="tab-pane fade profile-edit pt-3 active show" id="profile-edit" role="tabpanel">
+
+                                <!-- Profile Edit Form -->
+                                <form>
+                                    <div class="row mb-3">
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Craft
+                                            Image</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <img src=@Url.Content("~/Images/" + Model.ImagePath)
+                                                asp-append-version="true"  />
+                                            @* <img src="assets/img/profile-img.jpg" alt="Profile"> *@
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Name" class="col-md-4 col-lg-3 col-form-label">Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="Name" type="text" class="form-control" id="Name"
+                                                value="@Model.Name" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Price" class="col-md-4 col-lg-3 col-form-label">Price</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="Price" type="text" class="form-control" id="Price"
+                                                value="@Model.Price" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Category" class="col-md-4 col-lg-3 col-form-label">Category</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="Category" type="text" class="form-control" id="Category"
+                                                value="@Model.Category.CategoryName" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Description"
+                                            class="col-md-4 col-lg-3 col-form-label">Description</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="Description" type="text" class="form-control" id="Description"
+                                                value="@Model.Description" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Quantity" class="col-md-4 col-lg-3 col-form-label">Quantity</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="Quantity" type="text" class="form-control" id="Quantity"
+                                                value="@Model.Quantity" disabled>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="text-center">
+                                        <button asp-action="ViewItems" type="submit" class="btn btn-primary">Back to
+                                            List</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>

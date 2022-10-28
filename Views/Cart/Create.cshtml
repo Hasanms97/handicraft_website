@@ -1,0 +1,48 @@
+@model Handicraft_Website.Models.Cart
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Cart</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserrId" class="control-label"></label>
+                <select asp-for="UserrId" class ="form-control" asp-items="ViewBag.UserrId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfPruchase" class="control-label"></label>
+                <input asp-for="DateOfPruchase" class="form-control" />
+                <span asp-validation-for="DateOfPruchase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <input asp-for="OrderStatus" class="form-control" />
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

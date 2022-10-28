@@ -1,0 +1,226 @@
+@{
+    Layout = "_AdminDashboard";
+}
+@model IEnumerable<Handicraft_Website.Models.CartProduct>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/js/PDFScript.js"> </script>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Financial Report</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Financial Report</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Financial Report</h5>
+
+                        <!-- Horizontal Form -->
+                        <form asp-action="PDF_Report" method="post">
+                            <fieldset class="row mb-3">
+
+                                <div class="col-sm-10">
+                                    <legend>Report</legend>
+                                    <div class="form-check">
+                                        <input name="monthSelection" class="form-check-input" type="radio"
+                                            id="gridRadios1" value="option1" onclick="check()">
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Monthly
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="yearSelection" class="form-check-input" type="radio"
+                                            id="gridRadios2" value="option2" onclick="check()">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Yearly
+                                        </label>
+                                    </div>
+                                    <div style="display: none;" class="row mb-3" id="monthdiv">
+                                        <label class="col-sm-2 col-form-label">Select Month</label>
+                                        <div class="col-sm-10" id="monthdiv">
+                                            <select name="month" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value='1'>Janaury</option>
+                                                <option name="MyRadioField" value='2'>February</option>
+                                                <option name="MyRadioField" value='3'>March</option>
+                                                <option name="MyRadioField" value='4'>April</option>
+                                                <option name="MyRadioField" value='5'>May</option>
+                                                <option name="MyRadioField" value='6'>June</option>
+                                                <option name="MyRadioField" value='7'>July</option>
+                                                <option name="MyRadioField" value='8'>August</option>
+                                                <option name="MyRadioField" value='9'>September</option>
+                                                <option name="MyRadioField" value='10'>October</option>
+                                                <option name="MyRadioField" value='11'>November</option>
+                                                <option name="MyRadioField" value='12'>December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: none;" class="row mb-3" id="yeardiv">
+                                        <label class="col-sm-2 col-form-label">Select Year</label>
+                                        <div class="col-sm-10">
+                                            <select name="year" class="form-select" aria-label="Default select example">
+                                                <option value="2000">2000</option>
+                                                <option value="2001">2001</option>
+                                                <option value="2002">2002</option>
+                                                <option value="2003">2003</option>
+                                                <option value="2004">2004</option>
+                                                <option value="2005">2005</option>
+                                                <option value="2006">2006</option>
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2009">2009</option>
+                                                <option value="2010">2010</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option selected value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </form><!-- End Horizontal Form -->
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="row justify-content-center">
+            <div class="col-lg">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Results</h5>
+
+                        <!-- Table with hoverable rows -->
+                        <table id="table" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price per unit</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            @if (Model == null)
+                            {
+
+                            }
+                            @if (Model != null)
+                            {
+                                int x = 1;
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@x</td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CartId)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product.Name)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product.Price)
+                                        </td>
+
+                                        <td>
+                                            @(item.Quantity * item.Product.Price)
+                                        </td>
+
+                                        @{
+                                            x++;
+                                        }
+                                    </tr>
+                                }
+                            }
+
+
+
+                            </tbody>
+                        </table>
+                        @if (Model != null)
+                        {
+                            <div class="text-center">
+                                <button onclick="generatePDF()" type="submit" class="btn btn-danger">Genrate PDF file<i
+                                    class="bi bi-file-earmark-pdf"></i></button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+</main>
+
+
+
+
+
+<script>
+
+
+    function check() {
+        var x = document.getElementById("monthdiv");
+        var z = document.getElementById("yeardiv");
+        if (document.getElementById('gridRadios1').checked) {
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                z.style.display = "none";
+            }
+        }
+        if (document.getElementById('gridRadios2').checked) {
+
+            if (z.style.display === "none") {
+                z.style.display = "block";
+                x.style.display = "none";
+            }
+        }
+    }
+
+</script>

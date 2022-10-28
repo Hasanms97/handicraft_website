@@ -1,0 +1,51 @@
+@model Tuple<Userr,UserLogin>
+@{
+	ViewData["Title"] = "Home Page";
+	Layout = "_Customer";
+}
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Dashboard</h1>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li class="active">my account</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a asp-controller="Customer" asp-action="ProfileOrders">Orders</a></li>
+                    <li><a asp-controller="Customer" asp-action="ProfileAddress">Address</a></li>
+                    <li><a asp-controller="Customer" class="active" asp-action="ProfileDetails">Profile Details</a></li>
+                    <li><a asp-controller="Customer"  asp-action="EditProfile">Edit Profile</a></li>
+					<li><a asp-controller="Customer" asp-action="EditPassword">Change Password</a></li>
+				</ul>
+				<div class="dashboard-wrapper dashboard-user-profile">
+					<div class="media">
+						<div class="pull-left text-center" href="#!">
+							<img class="media-object user-img" src=@Url.Content("~/Images/" + @Model.Item1.ImagePath)
+                                asp-append-version="true">
+						</div>
+						<div class="media-body">
+							<ul class="user-profile-list">
+								<li><span>First Name:</span>@Model.Item1.FirstName</li>
+								<li><span>Last Name:</span>@Model.Item1.LastName</li>
+								<li><span>Email:</span>@Model.Item2.Email</li>
+								<li><span>Username:</span>@Model.Item2.UserName</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
